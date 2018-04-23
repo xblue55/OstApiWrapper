@@ -4,9 +4,9 @@ use Curl\Curl as Curl;
 
 class Ostkit
 {
-    public $apiUrl = 'https://playgroundapi.ost.com';
-    public $apiKey = 'ad7143e1ff8518588bcd';
-    public $apiSecret = '435462fb707d33a6664cb46f947f0b778a8a0fe5d02a2be09f8749e5f78d2281';
+    public $apiUrl = '';
+    public $apiKey = '';
+    public $apiSecret = '';
 
 
 
