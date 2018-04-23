@@ -1,5 +1,5 @@
 <?php
-namespace Ost;
+namespace Ostkit;
 use Curl\Curl as Curl;
 
 class Ostkit
