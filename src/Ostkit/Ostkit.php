@@ -4,7 +4,7 @@ use Curl\Curl as Curl;
 
 class Ostkit
 {
-    public $apiUrl = '';
+    public $apiUrl = 'https://playgroundapi.ost.com';
     public $apiKey = '';
     public $apiSecret = '';
 
@@ -46,7 +46,7 @@ class Ostkit
         
         $curl = new Curl();
         $result = $curl->post($requestParams['requestURL'], $requestParams['inputParams']);
-        return $result->response;
+        return json_decode($result->response, true);
     }
 
 
@@ -63,7 +63,7 @@ class Ostkit
         $queryString = $this->generateQueryString(
             $endPoint,
             $inputParams,
-            $this->apiUrl,
+            $this->apiKey,
             $requestTimestamp
         );
 
@@ -77,7 +77,7 @@ class Ostkit
         $curl = new Curl();
         $result = $curl->post($requestParams['requestURL'], $requestParams['inputParams']);
 
-        return $result->response;
+        return json_decode($result->response, true);
     }
 
 
@@ -94,7 +94,7 @@ class Ostkit
         $queryString = $this->generateQueryString(
             $endPoint,
             $inputParams,
-            $this->apiUrl,
+            $this->apiKey,
             $requestTimestamp
         );
 
@@ -106,7 +106,7 @@ class Ostkit
         $requestParams = $this->generateRequestParams($endPoint, $inputParams, $signature, $requestTimestamp);
         $curl = new Curl();
         $result = $curl->get($requestParams['requestURL'], $requestParams['inputParams']);
-        return $result->response;
+        return json_decode($result->response, true);
     }
 
     public function transactionCreate($name, $kind, $currency_value, $commission_percent, $currency_type = 'USD')
@@ -119,11 +119,12 @@ class Ostkit
             'currency_value' => $currency_value,
             'commission_percent' => $commission_percent
         ];
+        var_dump($inputParams);
         $requestTimestamp = time();
         $queryString = $this->generateQueryString(
             $endPoint,
             $inputParams,
-            $this->apiUrl,
+            $this->apiKey,
             $requestTimestamp
         );
 
@@ -135,7 +136,7 @@ class Ostkit
         $requestParams = $this->generateRequestParams($endPoint, $inputParams, $signature, $requestTimestamp);
         $curl = new Curl();
         $result = $curl->post($requestParams['requestURL'], $requestParams['inputParams']);
-        return $result->response;
+        return json_decode($result->response, true);
     }
 
 
@@ -154,7 +155,7 @@ class Ostkit
         $queryString = $this->generateQueryString(
             $endPoint,
             $inputParams,
-            $this->apiUrl,
+            $this->apiKey,
             $requestTimestamp
         );
 
@@ -166,7 +167,7 @@ class Ostkit
         $requestParams = $this->generateRequestParams($endPoint, $inputParams, $signature, $requestTimestamp);
         $curl = new Curl();
         $result = $curl->post($requestParams['requestURL'], $requestParams['inputParams']);
-        return $result->response;
+        return json_decode($result->response, true);
     }
 
 
@@ -178,7 +179,7 @@ class Ostkit
         $queryString = $this->generateQueryString(
             $endPoint,
             $inputParams,
-            $this->apiUrl,
+            $this->apiKey,
             $requestTimestamp
         );
 
@@ -190,12 +191,12 @@ class Ostkit
         $requestParams = $this->generateRequestParams($endPoint, $inputParams, $signature, $requestTimestamp);
         $curl = new Curl();
         $result = $curl->get($requestParams['requestURL'], $requestParams['inputParams']);
-        return $result->response;
+        return json_decode($result->response, true);
     }
 
     public function transactionExec($from_uuid, $to_uuid, $transaction_kind)
     {
-        $endPoint = '/transaction-types/list';
+        $endPoint = '/transaction-types/execute';
         $inputParams = [
             'from_uuid' => $from_uuid,
             'to_uuid' => $to_uuid,
@@ -205,7 +206,7 @@ class Ostkit
         $queryString = $this->generateQueryString(
             $endPoint,
             $inputParams,
-            $this->apiUrl,
+            $this->apiKey,
             $requestTimestamp
         );
 
@@ -217,13 +218,13 @@ class Ostkit
         $requestParams = $this->generateRequestParams($endPoint, $inputParams, $signature, $requestTimestamp);
         $curl = new Curl();
         $result = $curl->post($requestParams['requestURL'], $requestParams['inputParams']);
-        return $result->response;
+        return json_decode($result->response, true);
     }
 
 
     public function transactionStatus($transaction_uuids = array())
     {
-        $endPoint = '/transaction-types/list';
+        $endPoint = '/transaction-types/status';
         $inputParams = [
             'transaction_uuids' => $transaction_uuids,
         ];
@@ -231,7 +232,7 @@ class Ostkit
         $queryString = $this->generateQueryString(
             $endPoint,
             $inputParams,
-            $this->apiUrl,
+            $this->apiKey,
             $requestTimestamp
         );
 
@@ -243,7 +244,7 @@ class Ostkit
         $requestParams = $this->generateRequestParams($endPoint, $inputParams, $signature, $requestTimestamp);
         $curl = new Curl();
         $result = $curl->post($requestParams['requestURL'], $requestParams['inputParams']);
-        return $result->response;
+        return json_decode($result->response, true);
     }
 
     public function generateRequestParams($endPoint, $inputParams, $signature, $requestTimestamp)
